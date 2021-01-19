@@ -10,7 +10,7 @@ const getPosts = () => {
         try {
             //simulate delay
             await new Promise(resolve  => {
-                setTimeout(resolve,2000)
+                setTimeout(resolve,1000)
             })
 
 

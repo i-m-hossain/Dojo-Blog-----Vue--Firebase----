@@ -3,7 +3,7 @@
         {{error}}    
     </div>
     <div v-if="post" class="post">
-        <h2>{{post.title}}</h2>
+        <h3>{{post.title}}</h3>
         <p class="pre">{{post.body}}</p>
     </div>
     <div v-else>

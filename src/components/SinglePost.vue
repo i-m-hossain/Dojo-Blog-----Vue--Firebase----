@@ -33,5 +33,35 @@ setup(props){
 </script>
 
 <style>
+.post{
+    margin:0 40px 30px ;
+    padding-bottom: 30px ;
+    border-bottom: 1px dashed #e7e7e7;
+
+}
+
+.post h3{
+    display: inline-block;
+    position: relative;
+    font-size: 26px ;
+    color:#fff;
+    margin-bottom:10px;
+    max-width: 400px;
+
+}
+
+.post h3::before{
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background: #ff8800;
+    position: absolute;
+    color: #fff;
+    padding-right: 40px;
+    left:-30px;
+    transform: rotateZ(-1deg);
+}
 
 </style>
