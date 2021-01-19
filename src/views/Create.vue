@@ -2,7 +2,7 @@
 
     <div class="create">
         <h2>Create a new post</h2>
-        <form action="" >
+        <form action="" @submit.prevent="handleSubmit">
             <label for="">Title</label>
             <input v-model="title" type="text" required>
 
@@ -14,7 +14,7 @@
             
             <div v-for="tag in tags" :key="tag" class="pill">#{{tag}}</div>
             
-            <button v-on:click.prevent="post" > Add Post</button>
+            <button > Add Post</button>
 
         </form>
     </div>
@@ -40,8 +40,24 @@ export default {
                 tags.value.push(tag.value)
             }
             tag.value = ''
+          
+          
+        }
+        const handleSubmit = async () => {
+
+            const post={
+                title: title.value,
+                body: body.value,
+                tags: tags.value
+            }
+            await fetch('http://localhost:3000/posts',{
+                method:'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(post)
+
+            })
             
-        },
+        }
         
 
         return {title, body,tag, handleKeyDown, tags, handleSubmit}
