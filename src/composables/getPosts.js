@@ -12,7 +12,7 @@ const getPosts = () => {
         try {
            
             //getting posts from firebase using projectFirestore
-           const res = await projectFirestore.collection('posts').get()  //connecting to firebase collection
+           const res = await projectFirestore.collection('posts').orderBy('createdAt', 'desc').get()  //connecting to firebase collection
             // console.log(res)  
             posts.value = res.docs.map( doc => {   //cycled through the objects using map function
                 console.log(doc.data())

@@ -1,16 +1,16 @@
 <template>
 
     <div class="create">
-        <h2>Create a new post</h2>
-        <form action="" @submit.prevent="handleSubmit">
+       
+        <form action="" @submit.prevent="handleSubmit"> <!--- click event attached when submit-->
             <label for="">Title</label>
             <input v-model="title" type="text" required>
 
             <label for="">Content</label>
             <textarea v-model="body" name="" id="" cols="10" rows="5" required></textarea>
 
-            <Label>Tags</Label>
-            <input v-model="tag" @keydown.enter.prevent="handleKeyDown" type="text" placeholder="Hit 'Enter' to add a tag">
+            <Label>Tags (Hit 'Enter' to add a tag)</Label>
+            <input v-model="tag" @keydown.enter.prevent="handleKeyDown" type="text" > <!--keydown event when presing 'Enter'--->
             
             <div v-for="tag in tags" :key="tag" class="pill">#{{tag}}</div>
             
@@ -23,11 +23,14 @@
 
 <script>
 
+
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { projectFirestore, timestamp } from '../firebase/config'
 
 export default {
 
+    
     setup(){
 
         const title = ref('')
@@ -35,7 +38,10 @@ export default {
         const tag = ref('')
         const tags= ref([])
 
-        const handleKeyDown= () => {
+        const router = useRouter() //new instance of useRouter  which will be needed to push the current route(web page) to another route 
+        // console.log( router )
+
+        const handleKeyDown= () => { 
             if(!tags.value.includes(tag.value)){
                 tag.value = tag.value.replace(/\s/, '') //replace the whitespace
                 tags.value.push(tag.value)
@@ -43,18 +49,18 @@ export default {
             tag.value = ''
           
           
-        }
+        }//this handkleKeyDown function fires only when typing 'tag' value is not exist in 'tags'.After whitespace removed, typed data will be stored as a tag 
         const handleSubmit = async () => {
 
             const post={
                 title: title.value,
                 body: body.value,
                 tags: tags.value,
-                createdAt: timestamp()
+                createdAt: timestamp() //check firebase/config.js how this is obtained 
             }
-            const res = await projectFirestore.collection('posts').add(post)  //adding post to firebase
+            const res = await projectFirestore.collection('posts').add(post)  //adding post to firebase (POST request)
            
-            
+            router.push({name: 'Home'})
         }
         
 
