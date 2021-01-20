@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 //init firebase
 
-firebase.initializeApp(FirebaseConfig)
+firebase.initializeApp(firebaseConfig)
 
 //init firestore service
 

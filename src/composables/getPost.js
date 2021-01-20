@@ -1,4 +1,6 @@
 import { ref } from 'vue'
+import { projectFirestore } from '../firebase/config'
+
 
 const getPost = (id) => {
 
@@ -8,18 +10,16 @@ const getPost = (id) => {
     const load = async() => {
         
         try {
-            
-            //Simute Delay
-            await new Promise(resolve => {
-                setTimeout(resolve,1000)
-            })
+        
+            /**** Getting posts from firebase using firestore  ****/
 
-            let data = await fetch('http://localhost:3000/posts/' + id) 
-            if (!data.ok) {
-                throw Error('The post does not exist ')
+            const res = await projectFirestore.collection('posts').doc(id).get()  //connecting to firebase collection
+            console.log(res) 
+            if (!res.exists) {
+                throw Error('the post is not exist')
             }
-            post.value = await data.json()
-            
+            post.value = { ...res.data(), id: res.id}
+            console.log(post.value)            
             
         } catch (err) {
             error.value = err.message
