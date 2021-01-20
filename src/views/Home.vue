@@ -8,11 +8,12 @@
     <div v-else> 
       <Spinner/>
     </div>
+
   </div>
 </template>
 
 <script>
-
+ 
 import Spinner from '@/components/Spinner'
 import PostList from '@/components/PostList'
 import getPosts from '@/composables/getPosts'
