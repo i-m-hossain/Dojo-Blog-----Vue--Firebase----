@@ -4,8 +4,9 @@
         <div v-if="error"> <!---First check if any json error occurs --> 
             {{ error }}
         </div>
-        <div v-if="posts.length" > <!--- if post exists only the 'Postlist will be showed--->
+        <div v-if="posts.length" class="layout"> <!--- if post exists only the 'Postlist will be showed--->
             <PostList :posts = "postWithTags"/> <!-- props value 'postWithTags' received from the computed property --->
+            <TagCloud :posts = "posts"/>
         </div>
         <div v-else>  <!-- Showing the spinner until the data is loaded--->
             <Spinner/>
@@ -20,11 +21,12 @@
 import Spinner from '@/components/Spinner'
 import PostList from '@/components/PostList'
 import getPosts from '@/composables/getPosts'
+import TagCloud from '@/components/TagCloud'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 
 export default {
-    components: {Spinner, PostList},
+    components: {Spinner, PostList, TagCloud},
     setup(){
 
         const route = useRoute() //creating a useRoute instance
@@ -45,5 +47,9 @@ export default {
 </script>
 
 <style>
-
+    .tags{
+    margin: 0 auto;
+    padding:10px;
+    max-width:1200px
+  }
 </style>

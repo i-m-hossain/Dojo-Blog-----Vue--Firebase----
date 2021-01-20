@@ -3,7 +3,7 @@
     <h1>Home</h1>
     
     <div v-if="error"> {{ error }}</div> <!---Checks if any error(json) exists-->
-    <div v-if="posts.length" > <!--Post will be shown only when posts exist-->
+    <div v-if="posts.length" class="layout" > <!--Post will be shown only when posts exist-->
       <PostList :posts = "posts"/>
       <TagCloud :posts = "posts"/>
     </div>
@@ -43,5 +43,14 @@ export default {
     margin: 0 auto;
     padding:10px;
     max-width:1200px
+  }
+  .layout{
+    /***  display: flex;
+    justify-content: space-between; ***/
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+
+
   }
 </style>
